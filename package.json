@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "ng serve",
-    "build": "ng build",
-    "preview": "ng serve --configuration=production"
+    "build": "ng build --output-path=dist --base-href=/wedding/",
+    "copy-404": "cp dist/browser/index.html dist/browser/404.html",
+    "publish-gh": "npx gh-pages -d ./dist/browser",
+    "deploy": "npm run build && npm run copy-404 && npm run publish-gh"
+   
   },
   "dependencies": {
     "rxjs": "^7.8.2",
