@@ -76,22 +76,6 @@ export const weddingConfig: WeddingConfig = {
       }
     ]
   },
-  galleryImages: {
-    wedding: [
-      'https://picsum.photos/id/10/800/600',
-      'https://picsum.photos/id/20/800/600',
-      'https://picsum.photos/id/30/600/800',
-      'https://picsum.photos/id/40/800/600',
-      'https://picsum.photos/id/50/600/800',
-      'https://picsum.photos/id/60/800/600',
-    ],
-    daily: [
-      'https://picsum.photos/id/70/800/600',
-      'https://picsum.photos/id/80/600/800',
-      'https://picsum.photos/id/90/800/800',
-      'https://picsum.photos/id/100/600/800'
-    ]
-  },
 
   receptionDetails: {
     backgroundImg: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1920&auto=format&fit=crop'
@@ -151,7 +135,22 @@ export const weddingConfig: WeddingConfig = {
     authorName: 'AI Studio Developer',
     authorLink: '#'
   },
-
+  galleryImages: {
+    wedding: [
+      'https://picsum.photos/id/10/800/600',
+      'https://picsum.photos/id/20/800/600',
+      'https://picsum.photos/id/30/600/800',
+      'https://picsum.photos/id/40/800/600',
+      'https://picsum.photos/id/50/600/800',
+      'https://picsum.photos/id/60/800/600',
+    ],
+    daily: [
+      'https://picsum.photos/id/70/800/600',
+      'https://picsum.photos/id/80/600/800',
+      'https://picsum.photos/id/90/800/800',
+      'https://picsum.photos/id/100/600/800'
+    ]
+  },
   templates: {
     'template-1': {
       name: 'Sang Trọng Cổ Điển',

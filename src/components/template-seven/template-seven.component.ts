@@ -90,7 +90,7 @@ export class TemplateSevenComponent implements OnDestroy {
       this.currentAnimation.set(
         this.animations[Math.floor(Math.random() * this.animations.length)]
       );
-    }, 7000);
+    }, 4000);
   }
 
   startCountdown() {
