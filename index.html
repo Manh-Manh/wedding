@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Wedding Invitation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500&family=Dancing+Script:wght@400..700&family=Quicksand:wght@300..700&family=Great+Vibes&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Pacifico&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Lora:ital,wght@0,400..700;1,400..700&family=Patrick+Hand&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Alex+Brush&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .font-dancing { font-family: 'Dancing Script', cursive; }
+    .font-quicksand { font-family: 'Quicksand', sans-serif; }
+    .font-great-vibes { font-family: 'Great Vibes', cursive; }
+    .font-lato { font-family: 'Lato', sans-serif; }
+    .font-pacifico { font-family: 'Pacifico', cursive; }
+    .font-nunito { font-family: 'Nunito', sans-serif; }
+    .font-lora { font-family: 'Lora', serif; }
+    .font-patrick-hand { font-family: 'Patrick Hand', cursive; }
+    .font-merriweather { font-family: 'Merriweather', serif; }
+    .font-alex-brush { font-family: 'Alex Brush', cursive; }
+    
+    /* Fade-in on scroll animation */
+    .fade-in-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "rxjs": "https://aistudiocdn.com/rxjs@^7.8.2?conditions=es2015",
+    "rxjs/operators": "https://aistudiocdn.com/rxjs@^7.8.2/operators?conditions=es2015",
+    "rxjs/ajax": "https://aistudiocdn.com/rxjs@^7.8.2/ajax?conditions=es2015",
+    "rxjs/webSocket": "https://aistudiocdn.com/rxjs@^7.8.2/webSocket?conditions=es2015",
+    "rxjs/testing": "https://aistudiocdn.com/rxjs@^7.8.2/testing?conditions=es2015",
+    "rxjs/fetch": "https://aistudiocdn.com/rxjs@^7.8.2/fetch?conditions=es2015",
+    "@angular/platform-browser": "https://next.esm.sh/@angular/platform-browser@^21.0.0?external=rxjs",
+    "@angular/common": "https://next.esm.sh/@angular/common@^21.0.0?external=rxjs",
+    "@angular/core": "https://next.esm.sh/@angular/core@^21.0.0?external=rxjs",
+    "@angular/compiler": "https://next.esm.sh/@angular/compiler@^21.0.0?external=rxjs",
+    "@angular/router": "https://next.esm.sh/@angular/router@^21.0.0?external=rxjs",
+    "@angular/forms": "https://next.esm.sh/@angular/forms@^21.0.0?external=rxjs"
+  }
+}
+</script>
+<!-- <link rel="stylesheet" href="/index.css"> -->
+</head>
+<body class="bg-gray-50">
+  <app-root></app-root>
+</body>
+</html>

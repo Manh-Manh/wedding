@@ -1,0 +1,13 @@
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+@if (isLoading()) {
+  <div class="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center">
+    <div class="relative">
+      <svg class="w-24 h-24 text-rose-500 animate-ping" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+      <svg class="w-24 h-24 text-rose-500 absolute top-0 left-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+    </div>
+     <p class="mt-4 text-lg text-gray-600">Loading your beautiful invitation...</p>
+  </div>
+}

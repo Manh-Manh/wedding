@@ -1,0 +1,281 @@
+<div class="bg-[#1a1a1a] text-white font-lato relative overflow-hidden">
+  @if (config().advancedFeatures.fallingEffects) {
+    <div class="fireworks-container">
+      <div class="firework"></div><div class="firework"></div><div class="firework"></div>
+    </div>
+  }
+  <a routerLink="/home" class="fixed top-4 left-4 z-50 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-full shadow-md hover:bg-black/70 transition border border-amber-300/50">← Back to Templates</a>
+
+  <!-- Hero Section -->
+  <header class="h-screen flex items-center justify-center text-center p-4 relative overflow-hidden" [style.background-image]="'url(' + templateInfo().heroImage + ')'" style="background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="absolute inset-0 border-8 border-amber-300/80 m-8"></div>
+    <div class="relative z-10" appFadeIn>
+      <p class="text-xl tracking-[0.3em] uppercase">You are invited to the wedding of</p>
+      <h1 class="text-7xl md:text-9xl font-playfair my-4 text-amber-300">{{ config().couple.groom.name }} & {{ config().couple.bride.name }}</h1>
+      <p class="text-2xl tracking-[0.2em]">{{ getFormattedDate() }}</p>
+    </div>
+  </header>
+
+  <!-- Art Deco Divider -->
+  <div class="py-12 bg-[#1a1a1a] flex justify-center items-center">
+    <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+      <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+      <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <!-- Countdown Section -->
+  @if (config().sectionVisibility.countdown) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto text-center px-4">
+        <h2 class="text-5xl font-playfair text-amber-300">The Celebration Begins In</h2>
+        <div class="py-8 flex justify-center items-center">
+          <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+            <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="grid grid-cols-4 gap-8 max-w-2xl mx-auto">
+          @for (item of [['days', timeLeft().days], ['hours', timeLeft().hours], ['minutes',timeLeft().minutes], ['seconds',timeLeft().seconds]]; track item[0]) {
+            <div class="border-2 border-amber-300/80 p-6">
+              <p class="text-6xl font-playfair">{{ item[1] }}</p>
+              <p class="uppercase tracking-[0.2em] text-amber-300/80">{{ item[0] }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Couple Section -->
+  @if (config().sectionVisibility.couple) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="text-center p-8 border-2 border-amber-300/80 relative">
+            <div class="absolute -top-4 -left-4 w-12 h-12 border-l-2 border-t-2 border-amber-300"></div>
+            <div class="absolute -bottom-4 -right-4 w-12 h-12 border-r-2 border-b-2 border-amber-300"></div>
+            <img [src]="config().couple.groom.image" class="w-48 h-48 rounded-full mx-auto object-cover mb-6">
+            <h3 class="text-4xl font-playfair text-amber-300">{{ config().couple.groom.name }}</h3>
+            <p class="text-white/70 mt-2">Son of {{ config().couple.groom.parents }}</p>
+            <p class="text-white/80 mt-4 italic">"{{ config().couple.groom.wittyDescription }}"</p>
+          </div>
+          <div class="text-center p-8 border-2 border-amber-300/80 relative">
+            <div class="absolute -top-4 -left-4 w-12 h-12 border-l-2 border-t-2 border-amber-300"></div>
+            <div class="absolute -bottom-4 -right-4 w-12 h-12 border-r-2 border-b-2 border-amber-300"></div>
+            <img [src]="config().couple.bride.image" class="w-48 h-48 rounded-full mx-auto object-cover mb-6">
+            <h3 class="text-4xl font-playfair text-amber-300">{{ config().couple.bride.name }}</h3>
+            <p class="text-white/70 mt-2">Daughter of {{ config().couple.bride.parents }}</p>
+            <p class="text-white/80 mt-4 italic">"{{ config().couple.bride.wittyDescription }}"</p>
+          </div>
+        </div>
+        <div class="text-center mt-20 max-w-3xl mx-auto">
+          <p class="text-2xl text-amber-300/80 italic">"{{ config().loveQuote.text }}"</p>
+          <p class="mt-2 text-white/70">- {{ config().loveQuote.author }} -</p>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Story Section -->
+  @if (config().sectionVisibility.story) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto px-4 max-w-4xl text-center">
+        <h2 class="text-5xl font-playfair text-amber-300">{{ config().loveStory.title }}</h2>
+        <div class="py-8 flex justify-center items-center">
+          <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+            <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="space-y-12 mt-8">
+          @for (milestone of config().loveStory.milestones; track $index) {
+            <div class="grid grid-cols-3 gap-8 items-center text-center">
+              <div class="h-px bg-amber-300/50"></div>
+              <img [src]="milestone.image" alt="story" class="w-full h-auto object-cover border-4 border-amber-300/80 p-1">
+              <div class="h-px bg-amber-300/50"></div>
+              <div class="col-span-3">
+                <p class="font-playfair text-amber-300 text-xl">{{ formatStoryDate(milestone.date) }}</p>
+                <p class="text-white/80 mt-2">{{ milestone.content }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Gallery Section -->
+  @if (config().sectionVisibility.gallery) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-5xl font-playfair text-amber-300">A Moment in Time</h2>
+        <div class="py-8 flex justify-center items-center">
+          <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+            <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="flex justify-center gap-4 mb-8">
+          @for(category of galleryCategories(); track category) {
+            <button (click)="selectCategory(category)" 
+                    [class.bg-amber-300]="activeCategory() === category"
+                    [class.text-black]="activeCategory() === category"
+                    class="px-6 py-2 transition-colors duration-300 border border-amber-300 uppercase tracking-widest">
+              {{ category }}
+            </button>
+          }
+        </div>
+        <div class="columns-2 md:columns-4 gap-4">
+          @for(image of activeImages(); track $index) {
+            <div class="p-2 border border-amber-300/50 mb-4 break-inside-avoid" (click)="openLightbox($index)">
+              <img [src]="image" class="w-full h-full object-cover transition-opacity duration-300 hover:opacity-75 cursor-pointer">
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Event & Map Section -->
+  @if (config().sectionVisibility.event) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-5xl font-playfair text-amber-300">The Grand Affair</h2>
+        <div class="py-8 flex justify-center items-center">
+          <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+            <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-8 mt-8">
+          @for (location of [config().mainEvent, config().couple.groom.homeLocation, config().couple.bride.homeLocation]; track location.name) {
+            <div class="bg-black/50 p-6 border border-amber-300/50 flex flex-col">
+              <h3 class="text-2xl font-playfair mb-4 text-amber-300">{{ location.name }}</h3>
+              @if(location === config().mainEvent) {
+                <p class="text-sm text-white/70"><strong>Venue:</strong> {{ location.venue }}</p>
+                <p class="text-sm text-white/70"><strong>Address:</strong> {{ location.address }}</p>
+                <p class="text-sm text-white/70 mb-4"><strong>Time:</strong> {{ getFormattedTime() }}</p>
+              }
+              <div class="w-full h-64 mt-auto border-2 border-amber-300/80">
+                <iframe [src]="location.mapUrl | safeUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+  
+  <!-- Gifting Section -->
+  @if (config().sectionVisibility.gifting) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto px-4 text-center max-w-5xl">
+        <h2 class="text-5xl font-playfair text-amber-300">{{ config().gifting.title }}</h2>
+        <div class="py-8 flex justify-center items-center">
+          <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+            <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <p class="text-white/70 mb-12">{{ config().gifting.intro }}</p>
+        <div class="grid md:grid-cols-2 gap-8">
+          @for (gift of [config().gifting.groom, config().gifting.bride]; track gift.accountHolder) {
+            <div class="bg-black/50 p-8 border border-amber-300/50 text-center">
+              <h3 class="text-2xl font-playfair text-amber-300 mb-4">For the {{ gift === config().gifting.groom ? 'Groom' : 'Bride' }}</h3>
+              <img [src]="gift.qrCodeUrl" [alt]="gift.accountHolder + ' QR Code'" class="w-32 h-32 mx-auto p-1 bg-white rounded-sm">
+              <p class="mt-4 text-sm text-white/70">{{ gift.bankName }}</p>
+              <p class="font-semibold uppercase tracking-widest">{{ gift.accountHolder }}</p>
+              <p class="text-white/80 text-sm">{{ gift.accountNumber }}</p>
+              <button (click)="copyToClipboard(gift.accountNumber, gift === config().gifting.groom ? 'groom' : 'bride')" class="mt-4 text-sm px-4 py-2 border border-amber-300 uppercase tracking-widest w-full transition-colors duration-300" [class.bg-green-500]="(gift === config().gifting.groom ? copiedGroom() : copiedBride())" [class.border-green-500]="(gift === config().gifting.groom ? copiedGroom() : copiedBride())" [class.hover:bg-amber-300]="!(gift === config().gifting.groom ? copiedGroom() : copiedBride())" [class.hover:text-black]="!(gift === config().gifting.groom ? copiedGroom() : copiedBride())">
+                  {{ (gift === config().gifting.groom ? copiedGroom() : copiedBride()) ? 'Copied!' : 'Copy Account' }}
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Mini Game Section -->
+  @if(config().sectionVisibility.miniGame) {
+    <section class="py-20" appFadeIn>
+      <app-mini-game />
+    </section>
+  }
+
+  <!-- Guestbook Section -->
+  @if (config().sectionVisibility.guestbook) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto px-4 max-w-3xl text-center">
+        <h2 class="text-5xl font-playfair text-amber-300">{{ config().guestbook.title }}</h2>
+        <div class="py-8 flex justify-center items-center">
+          <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+            <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <p class="text-white/70 mb-8">{{ config().guestbook.intro }}</p>
+        
+        <div class="bg-black/50 p-8 border border-amber-300/50 mb-8">
+          <form [formGroup]="guestbookForm" (ngSubmit)="submitGuestbookMessage()">
+            <input type="text" formControlName="name" class="w-full p-3 mb-4 bg-transparent border-b border-amber-300/50 focus:outline-none focus:border-amber-300 text-white" placeholder="Your Name">
+            <textarea formControlName="message" rows="4" class="w-full p-3 mb-4 bg-transparent border-b border-amber-300/50 focus:outline-none focus:border-amber-300 text-white" placeholder="Leave your best wishes..."></textarea>
+            <button type="submit" [disabled]="guestbookForm.invalid" class="w-full bg-amber-300 text-black font-bold tracking-widest px-6 py-3 hover:bg-amber-200 transition-colors duration-300 disabled:bg-amber-300/50 disabled:cursor-not-allowed">
+              SUBMIT
+            </button>
+          </form>
+        </div>
+
+        <div class="space-y-6">
+          @for (message of guestbookMessages(); track $index) {
+            <div class="border-b border-amber-300/30 pb-4">
+              <p class="text-white/90 italic">"{{ message.message }}"</p>
+              <p class="text-right text-amber-300 mt-2 font-semibold">- {{ message.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Thank You Section -->
+  @if (config().sectionVisibility.thankYou) {
+    <section class="py-20" appFadeIn>
+      <div class="container mx-auto px-4 text-center max-w-3xl">
+        <h2 class="text-5xl font-playfair text-amber-300">{{ config().thankYou.title }}</h2>
+        <div class="py-8 flex justify-center items-center">
+          <svg class="w-64 h-auto text-amber-300/80" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="10" x2="80" y2="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M90 10 L100 0 L110 10 L100 20 L90 10Z" fill="currentColor"/>
+            <line x1="120" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <p class="text-lg text-white/80 mt-8">{{ config().thankYou.message }}</p>
+      </div>
+    </section>
+  }
+
+  <!-- Footer -->
+  <footer class="bg-black text-center py-6 border-t border-amber-300/50">
+    <p class="text-white/70">
+      A night to remember, by <a [href]="config().footer.authorLink" target="_blank" class="text-amber-300 hover:underline">{{ config().footer.authorName }}</a>
+    </p>
+  </footer>
+</div>
+
+@if (isLightboxOpen() && selectedImageUrl()) {
+  <app-lightbox 
+    [imageUrl]="selectedImageUrl()!"
+    (onClose)="closeLightbox()"
+    (onNext)="nextImage()"
+    (onPrev)="prevImage()" />
+}

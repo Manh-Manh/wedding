@@ -1,0 +1,315 @@
+<div class="bg-stone-50 text-stone-800">
+  <a routerLink="/home" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-800 px-4 py-2 rounded-full shadow-md hover:bg-white transition">← Back to Templates</a>
+  
+  <!-- Hero Section -->
+  <header class="relative h-screen flex items-center justify-center text-white text-center" [style.background-image]="'url(' + templateInfo().heroImage + ')'" style="background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 p-4">
+      <p class="font-light tracking-widest text-lg">WE ARE GETTING MARRIED</p>
+      <h1 class="text-7xl md:text-9xl font-playfair my-4">{{ config().couple.groom.name }} & {{ config().couple.bride.name }}</h1>
+      <p class="text-xl font-light">{{ getFormattedDate() }}</p>
+    </div>
+  </header>
+
+  <!-- Countdown Section -->
+  @if (config().sectionVisibility.countdown) {
+    <section class="py-20 bg-white" appFadeIn>
+      <div class="container mx-auto text-center px-4">
+        <h2 class="text-5xl font-playfair mb-4">The Big Day</h2>
+        <div class="w-48 h-px bg-stone-300 mx-auto my-6">
+          <svg width="192" height="24" viewBox="0 0 192 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-stone-400">
+            <path d="M96 23C72.5 23 55 1 0 1H192C137 1 119.5 23 96 23Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <p class="text-lg text-stone-600 mb-12">Join us as we celebrate our love and commitment.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+          <div class="p-6 rounded-lg bg-stone-100 shadow-sm">
+            <p class="text-6xl font-playfair text-rose-500">{{ timeLeft().days }}</p>
+            <p class="text-stone-500 uppercase tracking-wider">Days</p>
+          </div>
+          <div class="p-6 rounded-lg bg-stone-100 shadow-sm">
+            <p class="text-6xl font-playfair text-rose-500">{{ timeLeft().hours }}</p>
+            <p class="text-stone-500 uppercase tracking-wider">Hours</p>
+          </div>
+          <div class="p-6 rounded-lg bg-stone-100 shadow-sm">
+            <p class="text-6xl font-playfair text-rose-500">{{ timeLeft().minutes }}</p>
+            <p class="text-stone-500 uppercase tracking-wider">Minutes</p>
+          </div>
+          <div class="p-6 rounded-lg bg-stone-100 shadow-sm">
+            <p class="text-6xl font-playfair text-rose-500">{{ timeLeft().seconds }}</p>
+            <p class="text-stone-500 uppercase tracking-wider">Seconds</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Couple Section -->
+  @if (config().sectionVisibility.couple) {
+    <section class="py-20 bg-stone-50" appFadeIn>
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid md:grid-cols-5 gap-10 items-center mb-16">
+            <div class="md:col-span-2">
+                <img [src]="config().couple.groom.image" class="w-full h-auto rounded-lg shadow-xl object-cover aspect-[4/5]">
+            </div>
+            <div class="md:col-span-3 text-center md:text-left">
+                <h3 class="text-5xl font-playfair">{{ config().couple.groom.name }}</h3>
+                <p class="text-stone-500 mt-2 text-lg">Son of {{ config().couple.groom.parents }}</p>
+                <p class="text-stone-700 mt-4 text-lg italic leading-relaxed">"{{ config().couple.groom.wittyDescription }}"</p>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-5 gap-10 items-center">
+            <div class="md:col-span-3 text-center md:text-right order-2 md:order-1">
+                <h3 class="text-5xl font-playfair">{{ config().couple.bride.name }}</h3>
+                <p class="text-stone-500 mt-2 text-lg">Daughter of {{ config().couple.bride.parents }}</p>
+                <p class="text-stone-700 mt-4 text-lg italic leading-relaxed">"{{ config().couple.bride.wittyDescription }}"</p>
+            </div>
+            <div class="md:col-span-2 order-1 md:order-2">
+                <img [src]="config().couple.bride.image" class="w-full h-auto rounded-lg shadow-xl object-cover aspect-[4/5]">
+            </div>
+        </div>
+        <div class="text-center mt-20">
+          <p class="text-2xl font-playfair text-stone-700 italic">"{{ config().loveQuote.text }}"</p>
+          <p class="mt-2 text-stone-500">- {{ config().loveQuote.author }} -</p>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Story Section -->
+  @if (config().sectionVisibility.story) {
+    <section class="py-20 bg-white" appFadeIn>
+      <div class="container mx-auto px-4 max-w-4xl text-center">
+        <h2 class="text-5xl font-playfair mb-4">{{ config().loveStory.title }}</h2>
+        <div class="w-48 h-px bg-stone-300 mx-auto my-6">
+          <svg width="192" height="24" viewBox="0 0 192 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-stone-400">
+            <path d="M96 23C72.5 23 55 1 0 1H192C137 1 119.5 23 96 23Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="relative wrap overflow-hidden p-10 h-full mt-10">
+          <div class="border-2-2 absolute border-opacity-20 border-stone-700 h-full border" style="left: 50%"></div>
+          @for (milestone of config().loveStory.milestones; track $index; let isOdd = $odd) {
+            @if (isOdd) {
+              <!-- Left Timeline -->
+              <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-20 flex items-center order-1 bg-rose-500 shadow-xl w-8 h-8 rounded-full">
+                  <h1 class="mx-auto text-white font-semibold text-lg">&hearts;</h1>
+                </div>
+                <div class="order-1 bg-stone-50 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                  <img [src]="milestone.image" alt="Love story milestone" class="w-full h-auto rounded-md mb-4">
+                  <h3 class="font-bold text-stone-800 text-xl">{{ formatStoryDate(milestone.date) }}</h3>
+                  <p class="text-md leading-snug tracking-wide text-stone-600 text-opacity-100">{{ milestone.content }}</p>
+                </div>
+              </div>
+            } @else {
+              <!-- Right Timeline -->
+              <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-20 flex items-center order-1 bg-rose-500 shadow-xl w-8 h-8 rounded-full">
+                  <h1 class="mx-auto font-semibold text-lg text-white">&hearts;</h1>
+                </div>
+                <div class="order-1 bg-stone-50 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                  <img [src]="milestone.image" alt="Love story milestone" class="w-full h-auto rounded-md mb-4">
+                  <h3 class="font-bold text-stone-800 text-xl">{{ formatStoryDate(milestone.date) }}</h3>
+                  <p class="text-md leading-snug tracking-wide text-stone-600 text-opacity-100">{{ milestone.content }}</p>
+                </div>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Gallery Section -->
+  @if (config().sectionVisibility.gallery) {
+    <section class="py-20 bg-stone-50" appFadeIn>
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-5xl font-playfair mb-4">Our Moments</h2>
+        <div class="w-48 h-px bg-stone-300 mx-auto my-6">
+          <svg width="192" height="24" viewBox="0 0 192 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-stone-400">
+            <path d="M96 23C72.5 23 55 1 0 1H192C137 1 119.5 23 96 23Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="flex justify-center gap-4 my-8">
+          @for(category of galleryCategories(); track category) {
+            <button (click)="selectCategory(category)" 
+                    [class.bg-rose-500]="activeCategory() === category"
+                    [class.text-white]="activeCategory() === category"
+                    [class.bg-white]="activeCategory() !== category"
+                    [class.text-stone-800]="activeCategory() !== category"
+                    class="px-6 py-2 rounded-full shadow-md transition-colors duration-300">
+              {{ category }}
+            </button>
+          }
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          @for(image of activeImages(); track $index) {
+            <div class="overflow-hidden rounded-lg shadow-md" (click)="openLightbox($index)">
+              <img [src]="image" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500 cursor-pointer">
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Event & Map Section -->
+  @if (config().sectionVisibility.event) {
+    <section class="relative py-20 bg-cover bg-center bg-fixed" [style.background-image]="'url(' + config().receptionDetails.backgroundImg + ')'" appFadeIn>
+      <div class="container mx-auto px-4 relative">
+        <h2 class="text-5xl font-playfair mb-4 text-center text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7)">Wedding Details</h2>
+        <div class="w-48 h-px bg-stone-300 mx-auto my-6">
+          <svg width="192" height="24" viewBox="0 0 192 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-white/80">
+            <path d="M96 23C72.5 23 55 1 0 1H192C137 1 119.5 23 96 23Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-8 mt-12">
+          <!-- Main Event -->
+          <div class="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg text-stone-800 flex flex-col">
+            <h3 class="text-2xl font-playfair mb-4">{{ config().mainEvent.name }}</h3>
+            <p class="text-md text-stone-600 mb-1"><strong>Venue:</strong> {{ config().mainEvent.venue }}</p>
+            <p class="text-md text-stone-600 mb-1"><strong>Address:</strong> {{ config().mainEvent.address }}</p>
+            <p class="text-md text-stone-600 mb-4"><strong>Time:</strong> {{ getFormattedTime() }}</p>
+            <div class="w-full h-64 rounded-lg shadow-md overflow-hidden mt-auto">
+              <iframe [src]="config().mainEvent.mapUrl | safeUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+          <!-- Groom's Home -->
+          <div class="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg text-stone-800 flex flex-col">
+            <h3 class="text-2xl font-playfair mb-4">{{ config().couple.groom.homeLocation.name }}</h3>
+            <p class="text-md text-stone-600 mb-4">The Groom's family warmly invites you.</p>
+            <div class="w-full h-64 rounded-lg shadow-md overflow-hidden mt-auto">
+              <iframe [src]="config().couple.groom.homeLocation.mapUrl | safeUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+          <!-- Bride's Home -->
+          <div class="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg text-stone-800 flex flex-col">
+            <h3 class="text-2xl font-playfair mb-4">{{ config().couple.bride.homeLocation.name }}</h3>
+            <p class="text-md text-stone-600 mb-4">The Bride's family warmly invites you.</p>
+            <div class="w-full h-64 rounded-lg shadow-md overflow-hidden mt-auto">
+              <iframe [src]="config().couple.bride.homeLocation.mapUrl | safeUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Gifting Section -->
+  @if (config().sectionVisibility.gifting) {
+    <section class="py-20 bg-white" appFadeIn>
+      <div class="container mx-auto px-4 text-center max-w-4xl">
+        <h2 class="text-5xl font-playfair mb-4">{{ config().gifting.title }}</h2>
+        <div class="w-48 h-px bg-stone-300 mx-auto my-6">
+          <svg width="192" height="24" viewBox="0 0 192 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-stone-400">
+            <path d="M96 23C72.5 23 55 1 0 1H192C137 1 119.5 23 96 23Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <p class="text-lg text-stone-600 mb-12">{{ config().gifting.intro }}</p>
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Groom's Gift Info -->
+          <div class="bg-stone-50 p-6 rounded-lg shadow-sm">
+            <h3 class="text-2xl font-playfair mb-4">To {{ config().couple.groom.name }}</h3>
+            <img [src]="config().gifting.groom.qrCodeUrl" alt="Groom's QR Code" class="w-40 h-40 mx-auto rounded-md">
+            <p class="mt-4 text-stone-700"><strong>Bank:</strong> {{ config().gifting.groom.bankName }}</p>
+            <p class="text-stone-700"><strong>Account Holder:</strong> {{ config().gifting.groom.accountHolder }}</p>
+            <p class="text-stone-700"><strong>Account No:</strong> {{ config().gifting.groom.accountNumber }}</p>
+            <button (click)="copyToClipboard(config().gifting.groom.accountNumber, 'groom')" class="mt-4 px-6 py-2 rounded-full transition-colors duration-300" [class.bg-green-500]="copiedGroom()" [class.bg-rose-500]="!copiedGroom()" [class.text-white]="true">
+              {{ copiedGroom() ? 'Copied!' : 'Copy Account No.' }}
+            </button>
+          </div>
+          <!-- Bride's Gift Info -->
+          <div class="bg-stone-50 p-6 rounded-lg shadow-sm">
+            <h3 class="text-2xl font-playfair mb-4">To {{ config().couple.bride.name }}</h3>
+            <img [src]="config().gifting.bride.qrCodeUrl" alt="Bride's QR Code" class="w-40 h-40 mx-auto rounded-md">
+            <p class="mt-4 text-stone-700"><strong>Bank:</strong> {{ config().gifting.bride.bankName }}</p>
+            <p class="text-stone-700"><strong>Account Holder:</strong> {{ config().gifting.bride.accountHolder }}</p>
+            <p class="text-stone-700"><strong>Account No:</strong> {{ config().gifting.bride.accountNumber }}</p>
+            <button (click)="copyToClipboard(config().gifting.bride.accountNumber, 'bride')" class="mt-4 px-6 py-2 rounded-full transition-colors duration-300" [class.bg-green-500]="copiedBride()" [class.bg-rose-500]="!copiedBride()" [class.text-white]="true">
+              {{ copiedBride() ? 'Copied!' : 'Copy Account No.' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Mini Game Section -->
+  @if (config().sectionVisibility.miniGame) {
+    <section class="py-20 bg-stone-50" appFadeIn>
+      <app-mini-game />
+    </section>
+  }
+
+  <!-- Guestbook Section -->
+  @if (config().sectionVisibility.guestbook) {
+    <section class="py-20 bg-white" appFadeIn>
+      <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="text-5xl font-playfair mb-4 text-center">{{ config().guestbook.title }}</h2>
+        <div class="w-48 h-px bg-stone-300 mx-auto my-6">
+          <svg width="192" height="24" viewBox="0 0 192 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-stone-400">
+            <path d="M96 23C72.5 23 55 1 0 1H192C137 1 119.5 23 96 23Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <p class="text-lg text-stone-600 mb-8 text-center">{{ config().guestbook.intro }}</p>
+        
+        <div class="bg-stone-50 p-8 rounded-lg shadow-md mb-8">
+          <form [formGroup]="guestbookForm" (ngSubmit)="submitGuestbookMessage()">
+            <div class="mb-4">
+              <label for="name" class="block text-stone-700 font-bold mb-2">Your Name</label>
+              <input type="text" id="name" formControlName="name" class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-300" placeholder="John Doe">
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block text-stone-700 font-bold mb-2">Your Message</label>
+              <textarea id="message" formControlName="message" rows="4" class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-300" placeholder="Wishing you a lifetime of happiness..."></textarea>
+            </div>
+            <button type="submit" [disabled]="guestbookForm.invalid" class="w-full bg-rose-500 text-white px-6 py-3 rounded-md hover:bg-rose-600 transition-colors duration-300 disabled:bg-rose-300 disabled:cursor-not-allowed">
+              Leave Your Wish
+            </button>
+          </form>
+        </div>
+
+        <div class="space-y-6">
+          @for (message of guestbookMessages(); track $index) {
+            <div class="bg-stone-50 p-6 rounded-lg shadow-md">
+              <p class="text-stone-800 text-lg">"{{ message.message }}"</p>
+              <p class="text-right text-stone-600 mt-2 font-bold">- {{ message.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Thank You Section -->
+  @if (config().sectionVisibility.thankYou) {
+    <section class="py-20 bg-stone-50" appFadeIn>
+      <div class="container mx-auto px-4 text-center max-w-3xl">
+        <h2 class="text-5xl font-playfair mb-4">{{ config().thankYou.title }}</h2>
+        <div class="w-48 h-px bg-stone-300 mx-auto my-6">
+          <svg width="192" height="24" viewBox="0 0 192 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto text-stone-400">
+            <path d="M96 23C72.5 23 55 1 0 1H192C137 1 119.5 23 96 23Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <p class="text-lg text-stone-600 mt-8">{{ config().thankYou.message }}</p>
+      </div>
+    </section>
+  }
+
+  <!-- Footer -->
+  <footer class="bg-stone-100 text-center py-6">
+    <p class="text-stone-600">
+      Made with &hearts; by <a [href]="config().footer.authorLink" target="_blank" class="text-rose-500 hover:underline">{{ config().footer.authorName }}</a>
+    </p>
+  </footer>
+</div>
+
+@if (isLightboxOpen() && selectedImageUrl()) {
+  <app-lightbox 
+    [imageUrl]="selectedImageUrl()!"
+    (onClose)="closeLightbox()"
+    (onNext)="nextImage()"
+    (onPrev)="prevImage()" />
+}
