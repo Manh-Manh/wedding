@@ -7,6 +7,7 @@ export interface Person {
   homeLocation: {
     name: string;
     mapUrl: string;
+    des: string;
   };
 }
 
@@ -16,6 +17,7 @@ export interface WeddingEvent {
   venue: string;
   address: string;
   mapUrl: string;
+  visit: boolean;
 }
 
 export interface LoveStoryItem {
@@ -114,12 +116,17 @@ export interface WeddingConfig {
   galleryImages: {
     [key: string]: string[];
   };
+  galleryTitle: {
+    [key: string]: string;
+  },
+  slideImages: string[];
   templates: {
     [key: string]: TemplateInfo;
   };
   receptionDetails: {
     backgroundImg: string;
   };
+
   thankYou: ThankYou;
   gifting: GiftingSection;
   guestbook: GuestbookSection;

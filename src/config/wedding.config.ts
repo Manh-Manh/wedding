@@ -1,6 +1,23 @@
+import { title } from 'process';
 import { WeddingConfig } from '../models/config.model';
 
 export const weddingConfig: WeddingConfig = {
+    galleryTitle: {
+      greeting: 'WE ARE GETTING MARRIED',
+      countdownTitle:'The Big Day',
+      countdownDes:'Cùng đếm ngược tới thời điểm thiêng liêng',
+      title: "Kho ảnh",
+      wedding: "Váy cưới",
+      daily: "Thường ngày",
+      weddingDetail:"Thông tin tổ chức"
+    },
+    slideImages: [
+    'https://images.unsplash.com/photo-1523438097201-512ae7d59c44?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1457439067824-c1787c934333?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1542042161-d10f8a84d872?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1507525428034-b723a996f6ea?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1534790566855-4cb788d389ec?q=80&w=1920&auto=format&fit=crop'
+  ],
   couple: {
     groom: {
       name: 'Đình Mạnh',
@@ -10,17 +27,19 @@ export const weddingConfig: WeddingConfig = {
       parents: 'Con ông Nguyễn Văn A & bà Trần Thị B',
       homeLocation: {
         name: "Nhà trai",
+        des: "Điền Lư - Thanh Hóa",
         mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.631024925016!2d105.8222163148829!3d21.0073849860099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac8113262b95%3A0x7d94411135a8289a!2sRoyal%20City!5e0!3m2!1sen!2s!4v1628886981240!5m2!1sen!2s',
       },
     },
     bride: {
-      name: 'Thị Hường',
+      name: 'Nguyễn Hường',
       description: 'Người phụ nữ may mắn nhất trên đời.',
       wittyDescription: 'Bậc thầy về kế hoạch và tổ chức, người đã lên kế hoạch thành công để chiếm trọn trái tim Mạnh. Nguồn năng lượng từ trà sữa và phim tình cảm.',
       image: 'https://i.pinimg.com/564x/e3/37/10/e337107292a833b3a3721ddf1e00344d.jpg',
       parents: 'Con ông Trần Văn C & bà Lê Thị D',
       homeLocation: {
         name: "Nhà gái",
+        des: "Nghi Sơn - Thanh Hóa",
         mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.098416042456!2d105.78311181488313!3d21.02809598600001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab88535031d3%3A0x35624e5485b46e3a!2sKeangnam%20Hanoi%20Landmark%20Tower!5e0!3m2!1sen!2s!4v1628887038753!5m2!1sen!2s',
       },
     },
@@ -31,10 +50,11 @@ export const weddingConfig: WeddingConfig = {
   },
   mainEvent: {
     name: 'Lễ Cưới & Tiệc Chúc Mừng',
-    date: '2025-11-15T10:00:00',
+    date: '2025-12-15T10:00:00',
     venue: 'Cung Trống Đồng',
     address: '22 P. Thành Công, Thành Công, Ba Đình, Hà Nội',
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.357494458992!2d105.81745421533869!3d21.01859608600466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab725893d56d%3A0x33b8a6a6839b28a2!2zVHLhu5FuZyDEkOG7k25nIFBhbGFjZQ!5e0!3m2!1sen!2s!4v1676451392687!5m2!1sen!2s'
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.357494458992!2d105.81745421533869!3d21.01859608600466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab725893d56d%3A0x33b8a6a6839b28a2!2zVHLhu5FuZyDEkOG7k25nIFBhbGFjZQ!5e0!3m2!1sen!2s!4v1676451392687!5m2!1sen!2s',
+    visit: false
   },
   loveStory: {
     title: 'Chuyện Tình Yêu Của Chúng Mình',
@@ -57,7 +77,7 @@ export const weddingConfig: WeddingConfig = {
     ]
   },
   galleryImages: {
-    Wedding: [
+    wedding: [
       'https://picsum.photos/id/10/800/600',
       'https://picsum.photos/id/20/800/600',
       'https://picsum.photos/id/30/600/800',
@@ -65,68 +85,19 @@ export const weddingConfig: WeddingConfig = {
       'https://picsum.photos/id/50/600/800',
       'https://picsum.photos/id/60/800/600',
     ],
-    Daily: [
+    daily: [
       'https://picsum.photos/id/70/800/600',
       'https://picsum.photos/id/80/600/800',
       'https://picsum.photos/id/90/800/800',
       'https://picsum.photos/id/100/600/800'
     ]
   },
-  templates: {
-    'template-1': {
-      name: 'Sang Trọng Cổ Điển',
-      description: 'Thiết kế vượt thời gian với chút hiện đại tinh tế.',
-      heroImage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=400&auto=format&fit=crop',
-    },
-    'template-2': {
-      name: 'Tối Giản Hiện Đại',
-      description: 'Đường nét tinh gọn và tập trung vào typography đẹp mắt.',
-      heroImage: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=400&auto=format&fit=crop',
-    },
-    'template-3': {
-      name: 'Vườn Lãng Mạn',
-      description: 'Chủ đề mơ màng và kỳ ảo với điểm nhấn hoa.',
-      heroImage: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=400&auto=format&fit=crop',
-    },
-    'template-4': {
-      name: 'Đêm Sao Trời',
-      description: 'Chủ đề kỳ diệu và lãng mạn dưới bầu trời đầy sao.',
-      heroImage: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=400&auto=format&fit=crop',
-    },
-    'template-5': {
-      name: 'Art Deco Cổ Điển',
-      description: 'Tinh tế và quyến rũ với nét của thập niên 20.',
-      heroImage: 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?q=80&w=400&auto=format&fit=crop',
-    },
-    'template-6': {
-      name: 'Biển Nhiệt Đới',
-      description: 'Thiết kế tươi mới và thoáng đãng cho cảm giác đám cưới bãi biển.',
-      heroImage: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?q=80&w=400&auto=format&fit=crop',
-    },
-    'template-7': {
-      name: 'Màu Nước Nghệ Thuật',
-      description: 'Chủ đề mềm mại, cá nhân và nghệ thuật với nét vẽ.',
-      heroImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop',
-    },
-    'template-8': {
-      name: 'Rừng Thần Tiên',
-      description: 'Chủ đề kỳ ảo và ma thuật trong khu rừng cổ tích.',
-      heroImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1920&auto=format&fit=crop',
-      previewImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop',
-    }
-  },
+
   receptionDetails: {
     backgroundImg: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1920&auto=format&fit=crop'
   },
   thankYou: {
-    title: 'Cảm Ơn',
+    title: 'Lời Cảm Ơn',
     message: 'Cảm ơn bạn đã là một phần trong ngày đặc biệt của chúng mình và vì tình yêu cũng như sự hỗ trợ của bạn. Thật ý nghĩa với chúng mình khi có bạn cùng ăn mừng khi chúng mình bắt đầu hành trình mới.'
   },
   gifting: {
@@ -179,6 +150,57 @@ export const weddingConfig: WeddingConfig = {
   footer: {
     authorName: 'AI Studio Developer',
     authorLink: '#'
+  },
+
+  templates: {
+    'template-1': {
+      name: 'Sang Trọng Cổ Điển',
+      description: 'Thiết kế vượt thời gian với chút hiện đại tinh tế.',
+      heroImage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=400&auto=format&fit=crop',
+    },
+    'template-2': {
+      name: 'Tối Giản Hiện Đại',
+      description: 'Đường nét tinh gọn và tập trung vào typography đẹp mắt.',
+      heroImage: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=400&auto=format&fit=crop',
+    },
+    'template-3': {
+      name: 'Vườn Lãng Mạn',
+      description: 'Chủ đề mơ màng và kỳ ảo với điểm nhấn hoa.',
+      heroImage: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=400&auto=format&fit=crop',
+    },
+    'template-4': {
+      name: 'Đêm Sao Trời',
+      description: 'Chủ đề kỳ diệu và lãng mạn dưới bầu trời đầy sao.',
+      heroImage: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=400&auto=format&fit=crop',
+    },
+    'template-5': {
+      name: 'Art Deco Cổ Điển',
+      description: 'Tinh tế và quyến rũ với nét của thập niên 20.',
+      heroImage: 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?q=80&w=400&auto=format&fit=crop',
+    },
+    'template-6': {
+      name: 'Biển Nhiệt Đới',
+      description: 'Thiết kế tươi mới và thoáng đãng cho cảm giác đám cưới bãi biển.',
+      heroImage: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?q=80&w=400&auto=format&fit=crop',
+    },
+    'template-7': {
+      name: 'Màu Nước Nghệ Thuật',
+      description: 'Chủ đề mềm mại, cá nhân và nghệ thuật với nét vẽ.',
+      heroImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop',
+    },
+    'template-8': {
+      name: 'Rừng Thần Tiên',
+      description: 'Chủ đề kỳ ảo và ma thuật trong khu rừng cổ tích.',
+      heroImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1920&auto=format&fit=crop',
+      previewImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop',
+    }
   },
   sectionVisibility: {
     countdown: true,

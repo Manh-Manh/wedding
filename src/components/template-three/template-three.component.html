@@ -8,9 +8,23 @@
     <a routerLink="/home" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-[#5D4037] px-4 py-2 rounded-full shadow-md hover:bg-white transition">← Back to Templates</a>
 
     <!-- Hero Section -->
-    <header class="min-h-screen flex items-center justify-center p-4 text-center" [style.background-image]="'url(' + templateInfo().heroImage + ')'" style="background-size: cover; background-position: center;">
-      <div class="bg-white/80 backdrop-blur-sm p-8 md:p-16 rounded-lg shadow-xl" appFadeIn>
-        <h2 class="text-3xl font-dancing text-rose-400">Together with their families</h2>
+    <header class="min-h-screen flex items-center justify-center p-4 text-center relative overflow-hidden">
+      <!-- Slideshow Container -->
+      @for(image of slideImages(); track image; let i = $index) {
+        <div 
+          class="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
+          [style.background-image]="'url(' + image + ')'"
+          [class.opacity-100]="i === currentSlideIndex()"
+          [class.opacity-0]="i !== currentSlideIndex()">
+          <div 
+            class="w-full h-full slide-animation" 
+            [class]="i === currentSlideIndex() ? currentAnimation() : ''">
+          </div>
+        </div>
+      }
+      <div class="absolute inset-0 bg-white/10"></div>
+      <div class="bg-white/80 backdrop-blur-sm p-8 md:p-16 rounded-lg shadow-xl relative z-10" appFadeIn>
+        <h2 class="text-3xl font-dancing text-rose-400">{{ config().galleryTitle?.['greeting'] || '' }}</h2>
         <h1 class="text-6xl md:text-8xl font-playfair my-4 text-[#5D4037]">{{ config().couple.groom.name }}</h1>
         <span class="text-4xl font-dancing text-rose-400">&</span>
         <h1 class="text-6xl md:text-8xl font-playfair my-4 text-[#5D4037]">{{ config().couple.bride.name }}</h1>
@@ -30,12 +44,12 @@
             </div>
             <div class="text-center md:text-left">
               <h3 class="text-5xl font-playfair">{{ config().couple.groom.name }}</h3>
-              <p class="text-gray-500 mt-2 text-lg">Son of {{ config().couple.groom.parents }}</p>
+              <p class="text-gray-500 mt-2 text-lg">{{ config().couple.groom.parents }}</p>
               <p class="text-[#5D4037] mt-4 text-lg italic leading-relaxed">"{{ config().couple.groom.wittyDescription }}"</p>
             </div>
             <div class="text-center md:text-right order-last md:order-3">
               <h3 class="text-5xl font-playfair">{{ config().couple.bride.name }}</h3>
-              <p class="text-gray-500 mt-2 text-lg">Daughter of {{ config().couple.bride.parents }}</p>
+              <p class="text-gray-500 mt-2 text-lg">{{ config().couple.bride.parents }}</p>
               <p class="text-[#5D4037] mt-4 text-lg italic leading-relaxed">"{{ config().couple.bride.wittyDescription }}"</p>
             </div>
             <div class="relative flex justify-center h-96 order-3 md:order-last">
@@ -55,9 +69,16 @@
     @if (config().sectionVisibility.countdown) {
       <section class="py-24" appFadeIn>
         <div class="container mx-auto px-6 text-center">
-          <h2 class="text-6xl font-dancing text-rose-400">Until Forever</h2>
+          <h2 class="text-6xl font-dancing text-rose-400">{{ config().galleryTitle?.['countdownTitle'] || '' }}</h2>
           <div class="w-48 mx-auto my-6 text-rose-300">
-            <svg viewBox="0 0 200 20"><path d="M0 10 C 50 20, 150 -10, 200 10" stroke="currentColor" fill="transparent" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H20" stroke="currentColor" stroke-width="1"/>
+              <path d="M180 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M20 10 C 40 0, 60 20, 80 10 C 100 0, 120 20, 140 10 C 160 0, 170 15, 180 10" stroke="currentColor" fill="none" stroke-width="1.5"/>
+              <circle cx="100" cy="2" r="2" fill="currentColor"/>
+              <circle cx="60" cy="18" r="1.5" fill="currentColor"/>
+              <circle cx="140" cy="18" r="1.5" fill="currentColor"/>
+            </svg>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto mt-12">
             <div class="p-6 rounded-lg bg-white/50 backdrop-blur-sm shadow-sm border border-rose-100 transition-transform hover:scale-105">
@@ -87,7 +108,14 @@
         <div class="container mx-auto px-6 max-w-5xl text-center">
           <h2 class="text-6xl font-dancing text-rose-400">{{ config().loveStory.title }}</h2>
           <div class="w-48 mx-auto my-6 text-rose-300">
-            <svg viewBox="0 0 200 20"><path d="M0 10 C 50 20, 150 -10, 200 10" stroke="currentColor" fill="transparent" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H20" stroke="currentColor" stroke-width="1"/>
+              <path d="M180 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M20 10 C 40 0, 60 20, 80 10 C 100 0, 120 20, 140 10 C 160 0, 170 15, 180 10" stroke="currentColor" fill="none" stroke-width="1.5"/>
+              <circle cx="100" cy="2" r="2" fill="currentColor"/>
+              <circle cx="60" cy="18" r="1.5" fill="currentColor"/>
+              <circle cx="140" cy="18" r="1.5" fill="currentColor"/>
+            </svg>
           </div>
           <div class="grid md:grid-cols-3 gap-8 md:gap-12 mt-12">
               @for(milestone of config().loveStory.milestones; track $index) {
@@ -108,9 +136,16 @@
     @if (config().sectionVisibility.gallery) {
       <section class="py-24" appFadeIn>
         <div class="container mx-auto px-6 text-center">
-          <h2 class="text-6xl font-dancing text-rose-400">Sweet Memories</h2>
+          <h2 class="text-6xl font-dancing text-rose-400">{{config().galleryTitle?.['title'] || 'Kho ảnh'}}</h2>
           <div class="w-48 mx-auto my-6 text-rose-300">
-            <svg viewBox="0 0 200 20"><path d="M0 10 C 50 20, 150 -10, 200 10" stroke="currentColor" fill="transparent" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H20" stroke="currentColor" stroke-width="1"/>
+              <path d="M180 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M20 10 C 40 0, 60 20, 80 10 C 100 0, 120 20, 140 10 C 160 0, 170 15, 180 10" stroke="currentColor" fill="none" stroke-width="1.5"/>
+              <circle cx="100" cy="2" r="2" fill="currentColor"/>
+              <circle cx="60" cy="18" r="1.5" fill="currentColor"/>
+              <circle cx="140" cy="18" r="1.5" fill="currentColor"/>
+            </svg>
           </div>
           <div class="flex justify-center gap-4 my-8">
               @for(category of galleryCategories(); track category) {
@@ -120,7 +155,7 @@
                         [class.bg-white]="activeCategory() !== category"
                         [class.text-[#5D4037]]="activeCategory() !== category"
                         class="px-6 py-2 rounded-full shadow-md transition-colors duration-300 border border-rose-200">
-                  {{ category }}
+                  {{ config().galleryTitle?.[category] || category }}
                 </button>
               }
           </div>
@@ -139,9 +174,16 @@
     @if (config().sectionVisibility.event) {
       <section class="relative py-24 bg-cover bg-center" [style.background-image]="'url(' + config().receptionDetails.backgroundImg + ')'" appFadeIn>
         <div class="container mx-auto px-6 text-center relative">
-          <h2 class="text-6xl font-dancing text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">The Wedding Locations</h2>
+          <h2 class="text-6xl font-dancing text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">{{config().galleryTitle?.['weddingDetail'] || ''}}</h2>
           <div class="w-48 mx-auto my-6 text-white/80">
-            <svg viewBox="0 0 200 20"><path d="M0 10 C 50 20, 150 -10, 200 10" stroke="currentColor" fill="transparent" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H20" stroke="currentColor" stroke-width="1"/>
+              <path d="M180 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M20 10 C 40 0, 60 20, 80 10 C 100 0, 120 20, 140 10 C 160 0, 170 15, 180 10" stroke="currentColor" fill="none" stroke-width="1.5"/>
+              <circle cx="100" cy="2" r="2" fill="currentColor"/>
+              <circle cx="60" cy="18" r="1.5" fill="currentColor"/>
+              <circle cx="140" cy="18" r="1.5" fill="currentColor"/>
+            </svg>
           </div>
           <div class="grid md:grid-cols-3 gap-8 mt-12">
             <!-- Main Event -->
@@ -156,7 +198,7 @@
             <!-- Groom's Home -->
             <div class="bg-white/90 backdrop-blur-sm p-6 rounded-lg border-2 border-rose-200 shadow-lg">
               <h3 class="text-3xl font-playfair mb-2">{{ config().couple.groom.homeLocation.name }}</h3>
-              <p class="text-md text-gray-600 mb-4">Come share the joy with the groom's family.</p>
+              <p class="text-md text-gray-600 mb-4">{{config().couple.groom.homeLocation.des}}</p>
               <div class="w-full h-64 rounded-lg overflow-hidden mt-auto shadow-md">
                 <iframe [src]="config().couple.groom.homeLocation.mapUrl | safeUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
               </div>
@@ -164,7 +206,7 @@
             <!-- Bride's Home -->
             <div class="bg-white/90 backdrop-blur-sm p-6 rounded-lg border-2 border-rose-200 shadow-lg">
               <h3 class="text-3xl font-playfair mb-2">{{ config().couple.bride.homeLocation.name }}</h3>
-              <p class="text-md text-gray-600 mb-4">Come share the joy with the bride's family.</p>
+              <p class="text-md text-gray-600 mb-4">{{config().couple.bride.homeLocation.des}}</p>
               <div class="w-full h-64 rounded-lg overflow-hidden mt-auto shadow-md">
                 <iframe [src]="config().couple.bride.homeLocation.mapUrl | safeUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
               </div>
@@ -180,7 +222,14 @@
         <div class="container mx-auto px-4 text-center max-w-4xl">
           <h2 class="text-6xl font-dancing text-rose-400">{{ config().gifting.title }}</h2>
           <div class="w-48 mx-auto my-6 text-rose-300">
-            <svg viewBox="0 0 200 20"><path d="M0 10 C 50 20, 150 -10, 200 10" stroke="currentColor" fill="transparent" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H20" stroke="currentColor" stroke-width="1"/>
+              <path d="M180 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M20 10 C 40 0, 60 20, 80 10 C 100 0, 120 20, 140 10 C 160 0, 170 15, 180 10" stroke="currentColor" fill="none" stroke-width="1.5"/>
+              <circle cx="100" cy="2" r="2" fill="currentColor"/>
+              <circle cx="60" cy="18" r="1.5" fill="currentColor"/>
+              <circle cx="140" cy="18" r="1.5" fill="currentColor"/>
+            </svg>
           </div>
           <p class="text-lg text-[#5D4037] mb-12">{{ config().gifting.intro }}</p>
           <div class="grid md:grid-cols-2 gap-12">
@@ -217,16 +266,23 @@
           <div class="container mx-auto px-4 max-w-4xl">
               <h2 class="text-6xl font-dancing text-rose-400 text-center">{{ config().guestbook.title }}</h2>
               <div class="w-48 mx-auto my-6 text-rose-300">
-                <svg viewBox="0 0 200 20"><path d="M0 10 C 50 20, 150 -10, 200 10" stroke="currentColor" fill="transparent" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 10 H20" stroke="currentColor" stroke-width="1"/>
+                  <path d="M180 10 H200" stroke="currentColor" stroke-width="1"/>
+                  <path d="M20 10 C 40 0, 60 20, 80 10 C 100 0, 120 20, 140 10 C 160 0, 170 15, 180 10" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                  <circle cx="100" cy="2" r="2" fill="currentColor"/>
+                  <circle cx="60" cy="18" r="1.5" fill="currentColor"/>
+                  <circle cx="140" cy="18" r="1.5" fill="currentColor"/>
+                </svg>
               </div>
               <p class="text-lg text-[#5D4037] mb-8 text-center">{{ config().guestbook.intro }}</p>
               
               <div class="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-md mb-8">
                   <form [formGroup]="guestbookForm" (ngSubmit)="submitGuestbookMessage()">
-                      <input type="text" formControlName="name" class="w-full p-3 mb-4 border-b-2 border-rose-200 bg-transparent focus:outline-none focus:border-rose-400" placeholder="Your Name">
+                      <input type="text" formControlName="name" class="w-full p-3 mb-4 border-b-2 border-rose-200 bg-transparent focus:outline-none focus:border-rose-400" placeholder="Tên của bạn">
                       <textarea formControlName="message" rows="3" class="w-full p-3 mb-4 border-b-2 border-rose-200 bg-transparent focus:outline-none focus:border-rose-400" placeholder="Leave your sweet message..."></textarea>
                       <button type="submit" [disabled]="guestbookForm.invalid" class="w-full bg-rose-400 text-white px-6 py-3 rounded-lg hover:bg-rose-500 transition-colors duration-300 disabled:bg-rose-200">
-                          Pin Message
+                          Gửi lời chúc
                       </button>
                   </form>
               </div>
@@ -248,7 +304,14 @@
         <div class="container mx-auto px-6 text-center max-w-2xl">
           <h2 class="text-6xl font-dancing text-rose-400">{{ config().thankYou.title }}</h2>
           <div class="w-48 mx-auto my-6 text-rose-300">
-            <svg viewBox="0 0 200 20"><path d="M0 10 C 50 20, 150 -10, 200 10" stroke="currentColor" fill="transparent" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H20" stroke="currentColor" stroke-width="1"/>
+              <path d="M180 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M20 10 C 40 0, 60 20, 80 10 C 100 0, 120 20, 140 10 C 160 0, 170 15, 180 10" stroke="currentColor" fill="none" stroke-width="1.5"/>
+              <circle cx="100" cy="2" r="2" fill="currentColor"/>
+              <circle cx="60" cy="18" r="1.5" fill="currentColor"/>
+              <circle cx="140" cy="18" r="1.5" fill="currentColor"/>
+            </svg>
           </div>
           <p class="text-lg text-[#5D4037] mt-8">{{ config().thankYou.message }}</p>
         </div>

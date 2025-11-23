@@ -18,7 +18,7 @@
     <header class="h-screen flex items-center justify-center text-center p-4" [style.background-image]="'url(' + templateInfo().heroImage + ')'" style="background-size: cover; background-position: center;">
       <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10" appFadeIn>
-        <p class="text-xl text-amber-200 tracking-wider">A fairytale begins</p>
+        <p class="text-xl text-amber-200 tracking-wider">{{ config().galleryTitle?.['greeting'] || '' }}</p>
         <h1 class="text-7xl md:text-9xl font-alex-brush my-4 text-white" style="text-shadow: 0 0 15px #fde68a, 0 0 25px #fde68a;">{{ config().couple.groom.name }} & {{ config().couple.bride.name }}</h1>
         <p class="text-2xl font-light">{{ getFormattedDate() }}</p>
       </div>
@@ -28,9 +28,15 @@
     @if (config().sectionVisibility.countdown) {
       <section class="py-24" appFadeIn>
         <div class="container mx-auto text-center px-4">
-          <h2 class="text-6xl font-alex-brush text-amber-200">The Magic Begins...</h2>
+          <h2 class="text-6xl font-alex-brush text-amber-200">{{ config().galleryTitle?.['countdownTitle'] || '' }}</h2>
           <div class="w-48 mx-auto my-6 text-amber-200/70">
-            <svg viewBox="0 0 100 20"><path d="M5,10 C20,15, 80,5, 95,10" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M80 10 C 85 5, 95 5, 100 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 5, 115 5, 120 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 95 15, 85 15, 80 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 15, 115 15, 120 10" stroke="currentColor" fill="none"/>
+            </svg>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto mt-12">
             @for (item of [['days', timeLeft().days], ['hours', timeLeft().hours], ['minutes', timeLeft().minutes], ['seconds', timeLeft().seconds]]; track item[0]) {
@@ -52,13 +58,13 @@
             <div class="text-center md:text-left">
               <img [src]="config().couple.groom.image" class="w-48 h-48 rounded-full inline-block object-cover border-4 border-amber-200/50 shadow-lg shadow-amber-500/10">
               <h3 class="text-5xl font-alex-brush mt-6">{{ config().couple.groom.name }}</h3>
-              <p class="text-amber-100/80 mt-2">Son of {{ config().couple.groom.parents }}</p>
+              <p class="text-amber-100/80 mt-2">{{ config().couple.groom.parents }}</p>
               <p class="text-amber-50 mt-4 italic">"{{ config().couple.groom.wittyDescription }}"</p>
             </div>
             <div class="text-center md:text-right">
               <img [src]="config().couple.bride.image" class="w-48 h-48 rounded-full inline-block object-cover border-4 border-amber-200/50 shadow-lg shadow-amber-500/10">
               <h3 class="text-5xl font-alex-brush mt-6">{{ config().couple.bride.name }}</h3>
-              <p class="text-amber-100/80 mt-2">Daughter of {{ config().couple.bride.parents }}</p>
+              <p class="text-amber-100/80 mt-2">{{ config().couple.bride.parents }}</p>
               <p class="text-amber-50 mt-4 italic">"{{ config().couple.bride.wittyDescription }}"</p>
             </div>
           </div>
@@ -74,9 +80,15 @@
     @if (config().sectionVisibility.story) {
       <section class="py-24" appFadeIn>
         <div class="container mx-auto px-4 max-w-4xl text-center">
-          <h2 class="text-6xl font-alex-brush text-amber-200">Our Enchanted Tale</h2>
+          <h2 class="text-6xl font-alex-brush text-amber-200">{{ config().loveStory.title }}</h2>
           <div class="w-48 mx-auto my-6 text-amber-200/70">
-            <svg viewBox="0 0 100 20"><path d="M5,10 C20,15, 80,5, 95,10" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M80 10 C 85 5, 95 5, 100 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 5, 115 5, 120 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 95 15, 85 15, 80 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 15, 115 15, 120 10" stroke="currentColor" fill="none"/>
+            </svg>
           </div>
           <div class="border-l-2 border-amber-200/30 pl-8 space-y-16 relative mt-16 text-left">
             <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-amber-300 shadow-lg shadow-amber-300/50"></div>
@@ -97,9 +109,15 @@
     @if (config().sectionVisibility.gallery) {
       <section class="py-24" appFadeIn>
         <div class="container mx-auto px-4 text-center">
-          <h2 class="text-6xl font-alex-brush text-amber-200">Magical Moments</h2>
+          <h2 class="text-6xl font-alex-brush text-amber-200">{{config().galleryTitle?.['title'] || 'Kho ảnh'}}</h2>
           <div class="w-48 mx-auto my-6 text-amber-200/70">
-            <svg viewBox="0 0 100 20"><path d="M5,10 C20,15, 80,5, 95,10" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M80 10 C 85 5, 95 5, 100 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 5, 115 5, 120 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 95 15, 85 15, 80 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 15, 115 15, 120 10" stroke="currentColor" fill="none"/>
+            </svg>
           </div>
           <div class="flex justify-center gap-4 mb-8">
             @for(category of galleryCategories(); track category) {
@@ -109,7 +127,7 @@
                       [class.bg-[#2A4838]/50]="activeCategory() !== category"
                       [class.text-white]="activeCategory() !== category"
                       class="px-6 py-2 rounded-full shadow-md transition-colors duration-300 border border-amber-300/30">
-                {{ category }}
+                {{ config().galleryTitle?.[category] || category }}
               </button>
             }
           </div>
@@ -128,18 +146,25 @@
     @if (config().sectionVisibility.event) {
       <section class="py-24" appFadeIn>
         <div class="container mx-auto px-4 text-center">
-          <h2 class="text-6xl font-alex-brush text-amber-200">The Gathering</h2>
+          <h2 class="text-6xl font-alex-brush text-amber-200">{{config().galleryTitle?.['weddingDetail'] || ''}}</h2>
           <div class="w-48 mx-auto my-6 text-amber-200/70">
-            <svg viewBox="0 0 100 20"><path d="M5,10 C20,15, 80,5, 95,10" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M80 10 C 85 5, 95 5, 100 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 5, 115 5, 120 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 95 15, 85 15, 80 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 15, 115 15, 120 10" stroke="currentColor" fill="none"/>
+            </svg>
           </div>
           <div class="grid lg:grid-cols-3 gap-8 mt-12">
             @for (location of [config().mainEvent, config().couple.groom.homeLocation, config().couple.bride.homeLocation]; track location.name) {
               <div class="bg-[#2A4838]/50 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-amber-300/20 flex flex-col">
                 <h3 class="text-2xl font-merriweather font-bold mb-4 text-amber-200">{{ location.name }}</h3>
+                <p class="text-sm text-amber-100/80 mb-1">{{ location.des }}</p>
                 @if (location === config().mainEvent) {
-                  <p class="text-sm text-amber-100/80 mb-1"><strong>Venue:</strong> {{ location.venue }}</p>
-                  <p class="text-sm text-amber-100/80 mb-1"><strong>Address:</strong> {{ location.address }}</p>
-                  <p class="text-sm text-amber-100/80 mb-4"><strong>Time:</strong> {{ getFormattedTime() }}</p>
+                  <p class="text-sm text-amber-100/80 mb-1"><strong>Địa điểm:</strong> {{ location.venue }}</p>
+                  <p class="text-sm text-amber-100/80 mb-1"><strong>Địa chỉ:</strong> {{ location.address }}</p>
+                  <p class="text-sm text-amber-100/80 mb-4"><strong>Thời gian:</strong> {{ getFormattedTime() }}</p>
                 }
                 <div class="w-full h-64 rounded-lg shadow-md overflow-hidden mt-auto">
                   <iframe [src]="location.mapUrl | safeUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -157,7 +182,13 @@
         <div class="container mx-auto px-4 text-center max-w-4xl">
           <h2 class="text-6xl font-alex-brush text-amber-200">{{ config().gifting.title }}</h2>
           <div class="w-48 mx-auto my-6 text-amber-200/70">
-            <svg viewBox="0 0 100 20"><path d="M5,10 C20,15, 80,5, 95,10" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M80 10 C 85 5, 95 5, 100 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 5, 115 5, 120 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 95 15, 85 15, 80 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 15, 115 15, 120 10" stroke="currentColor" fill="none"/>
+            </svg>
           </div>
           <p class="text-lg text-amber-50/90 mb-12">{{ config().gifting.intro }}</p>
           <div class="grid md:grid-cols-2 gap-8">
@@ -191,16 +222,22 @@
         <div class="container mx-auto px-4 max-w-3xl text-center">
           <h2 class="text-6xl font-alex-brush text-amber-200">{{ config().guestbook.title }}</h2>
           <div class="w-48 mx-auto my-6 text-amber-200/70">
-            <svg viewBox="0 0 100 20"><path d="M5,10 C20,15, 80,5, 95,10" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M80 10 C 85 5, 95 5, 100 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 5, 115 5, 120 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 95 15, 85 15, 80 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 15, 115 15, 120 10" stroke="currentColor" fill="none"/>
+            </svg>
           </div>
           <p class="text-lg text-amber-50/90 mb-8">{{ config().guestbook.intro }}</p>
           
           <div class="bg-[#2A4838]/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-amber-300/20 mb-8">
             <form [formGroup]="guestbookForm" (ngSubmit)="submitGuestbookMessage()">
-              <input type="text" formControlName="name" class="w-full p-3 mb-4 bg-[#14281D]/50 border border-amber-300/30 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 text-white" placeholder="Your Name">
-              <textarea formControlName="message" rows="4" class="w-full p-3 mb-4 bg-[#14281D]/50 border border-amber-300/30 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 text-white" placeholder="Leave your magical wishes..."></textarea>
+              <input type="text" formControlName="name" class="w-full p-3 mb-4 bg-[#14281D]/50 border border-amber-300/30 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 text-white" placeholder="Tên của bạn">
+              <textarea formControlName="message" rows="4" class="w-full p-3 mb-4 bg-[#14281D]/50 border border-amber-300/30 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 text-white" placeholder="Lời chúc..."></textarea>
               <button type="submit" [disabled]="guestbookForm.invalid" class="w-full bg-amber-300 text-green-900 font-bold px-6 py-3 rounded-md hover:bg-amber-200 transition-colors duration-300 disabled:bg-amber-300/50 disabled:cursor-not-allowed">
-                Send Your Wish
+                Gửi lời chúc
               </button>
             </form>
           </div>
@@ -223,7 +260,13 @@
         <div class="container mx-auto px-4 text-center max-w-3xl">
           <h2 class="text-6xl font-alex-brush text-amber-200">Our Deepest Thanks</h2>
           <div class="w-48 mx-auto my-6 text-amber-200/70">
-            <svg viewBox="0 0 100 20"><path d="M5,10 C20,15, 80,5, 95,10" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H200" stroke="currentColor" stroke-width="1"/>
+              <path d="M80 10 C 85 5, 95 5, 100 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 5, 115 5, 120 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 95 15, 85 15, 80 10" stroke="currentColor" fill="none"/>
+              <path d="M100 10 C 105 15, 115 15, 120 10" stroke="currentColor" fill="none"/>
+            </svg>
           </div>
           <p class="text-lg text-amber-50/90 mt-8">{{ config().thankYou.message }}</p>
         </div>

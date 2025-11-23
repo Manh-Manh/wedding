@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, signal, OnDestroy, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, signal, OnDestroy, computed, QueryList, ElementRef, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -18,12 +18,16 @@ import { MiniGameComponent } from '../shared/mini-game/mini-game.component';
 export class TemplateOneComponent implements OnDestroy {
   private configService = inject(ConfigService);
   private guestbookService = inject(GuestbookService);
-  // FIX: Explicitly type FormBuilder to fix type inference issue.
   private fb: FormBuilder = inject(FormBuilder);
 
   config = this.configService.config;
-  templateKey = 'template-1';
-  templateInfo = computed(() => this.config().templates[this.templateKey]);
+  @ViewChildren('galleryImage') imageElements!: QueryList<ElementRef>;
+  // Slideshow state
+  slideImages = computed(() => this.config().slideImages);
+  currentSlideIndex = signal(0);
+  currentAnimation = signal('animate-kenburns-tl');
+  private slideIntervalId?: number;
+  private animations = ['animate-kenburns-tl', 'animate-kenburns-br', ''];
   
   timeLeft = signal({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   private intervalId?: number;
@@ -41,7 +45,7 @@ export class TemplateOneComponent implements OnDestroy {
 
   // Gallery and Lightbox state
   galleryCategories = computed(() => Object.keys(this.config().galleryImages));
-  
+  galleryTitles = computed(() => Object.values(this.config().galleryTitle));
   private userSelectedCategory = signal<string | null>(null);
 
   activeCategory = computed(() => {
@@ -57,7 +61,7 @@ export class TemplateOneComponent implements OnDestroy {
     const images = category ? gallery[category] : [];
     return Array.isArray(images) ? images : [];
   });
-  
+  loadedImages = signal<Set<number>>(new Set());
   selectedImageIndex = signal<number | null>(null);
   isLightboxOpen = computed(() => this.selectedImageIndex() !== null);
   selectedImageUrl = computed(() => {
@@ -69,8 +73,52 @@ export class TemplateOneComponent implements OnDestroy {
 
   constructor() {
     this.startCountdown();
+    this.startSlideshow();
   }
 
+  startSlideshow() {
+    this.slideIntervalId = window.setInterval(() => {
+      this.currentSlideIndex.update(i => (i + 1) % this.slideImages().length);
+      this.currentAnimation.set(
+        this.animations[Math.floor(Math.random() * this.animations.length)]
+      );
+    }, 7000);
+  }
+  ngAfterViewInit() {
+    this.setupLazyLoading();
+  }
+
+  private setupLazyLoading() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            const index = parseInt(img.dataset['index'] || '0');
+            
+            // Load image
+            if (img.dataset['src']) {
+              img.src = img.dataset['src'];
+              delete img.dataset['src'];
+            }
+            
+            this.loadedImages.update(set => {
+              const newSet = new Set(set);
+              newSet.add(index);
+              return newSet;
+            });
+            
+            observer.unobserve(img);
+          }
+        });
+      },
+      { rootMargin: '50px' }
+    );
+
+    this.imageElements.forEach(el => {
+      observer.observe(el.nativeElement);
+    });
+  }
   startCountdown() {
     const weddingDate = new Date(this.config().mainEvent.date).getTime();
     this.intervalId = window.setInterval(() => {
@@ -93,21 +141,22 @@ export class TemplateOneComponent implements OnDestroy {
 
   ngOnDestroy() {
     if (this.intervalId) clearInterval(this.intervalId);
+    if (this.slideIntervalId) clearInterval(this.slideIntervalId);
   }
 
   getFormattedDate(): string {
     const date = new Date(this.config().mainEvent.date);
-    return date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    return date.toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   }
 
   getFormattedTime(): string {
     const date = new Date(this.config().mainEvent.date);
-    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute:'2-digit' });
+    return date.toLocaleTimeString('vi-VN', { hour: '2-digit', minute:'2-digit' });
   }
 
   formatStoryDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    return date.toLocaleDateString('vi-VN', { year: 'numeric', month: 'long', day: 'numeric' });
   }
 
   async copyToClipboard(accountNumber: string, type: 'groom' | 'bride') {

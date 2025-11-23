@@ -39,8 +39,8 @@ export class GuestbookService {
         } else {
             // If nothing in storage, add initial messages for demonstration
              this._messages.set([
-                { name: 'Friend A', message: 'Wishing you a lifetime of love and happiness!', timestamp: new Date() },
-                { name: 'Family Member B', message: 'So excited to celebrate with you both. Congratulations!', timestamp: new Date() },
+                // { name: 'Friend A', message: 'Wishing you a lifetime of love and happiness!', timestamp: new Date() },
+                // { name: 'Family Member B', message: 'So excited to celebrate with you both. Congratulations!', timestamp: new Date() },
             ]);
         }
       } catch (error) {

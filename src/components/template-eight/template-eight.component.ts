@@ -41,7 +41,10 @@ export class TemplateEightComponent implements OnDestroy {
   });
 
   // Gallery and Lightbox state
-  galleryCategories = computed(() => Object.keys(this.config().galleryImages));
+  galleryCategories = computed(() => {
+    const { title, ...categories } = this.config().galleryImages;
+    return Object.keys(categories);
+  });
   
   private userSelectedCategory = signal<string | null>(null);
 

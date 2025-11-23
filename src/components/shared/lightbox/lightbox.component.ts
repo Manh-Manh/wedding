@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output, effect, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, effect, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -59,4 +59,12 @@ export class LightboxComponent {
     }
     this.timeoutId = window.setTimeout(() => this.showControls.set(false), 3000);
   }
+  onImageError(event: Event) {
+   console.error('❌ Failed to load image:', this.imageUrl());
+  }
+    // Tạo computed để đảm bảo có giá trị string
+  imageUrlValue = computed(() => {
+    const url = this.imageUrl();
+    return url;
+  });
 }

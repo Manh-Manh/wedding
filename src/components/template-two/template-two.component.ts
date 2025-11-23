@@ -18,12 +18,16 @@ import { MiniGameComponent } from '../shared/mini-game/mini-game.component';
 export class TemplateTwoComponent implements OnDestroy {
   private configService = inject(ConfigService);
   private guestbookService = inject(GuestbookService);
-  // FIX: Explicitly type FormBuilder to fix type inference issue.
   private fb: FormBuilder = inject(FormBuilder);
   
   config = this.configService.config;
-  templateKey = 'template-2';
-  templateInfo = computed(() => this.config().templates[this.templateKey]);
+
+  // Slideshow state
+  slideImages = computed(() => this.config().slideImages);
+  currentSlideIndex = signal(0);
+  currentAnimation = signal('animate-kenburns-tl');
+  private slideIntervalId?: number;
+  private animations = ['animate-kenburns-tl', 'animate-kenburns-br', ''];
 
   timeLeft = signal({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   private intervalId?: number;
@@ -40,7 +44,10 @@ export class TemplateTwoComponent implements OnDestroy {
   });
 
   // Gallery and Lightbox state
-  galleryCategories = computed(() => Object.keys(this.config().galleryImages));
+  galleryCategories = computed(() => {
+    const { title, ...categories } = this.config().galleryImages;
+    return Object.keys(categories);
+  });
   
   private userSelectedCategory = signal<string | null>(null);
 
@@ -69,6 +76,16 @@ export class TemplateTwoComponent implements OnDestroy {
 
   constructor() {
     this.startCountdown();
+    this.startSlideshow();
+  }
+
+  startSlideshow() {
+    this.slideIntervalId = window.setInterval(() => {
+      this.currentSlideIndex.update(i => (i + 1) % this.slideImages().length);
+      this.currentAnimation.set(
+        this.animations[Math.floor(Math.random() * this.animations.length)]
+      );
+    }, 7000);
   }
 
   startCountdown() {
@@ -93,6 +110,7 @@ export class TemplateTwoComponent implements OnDestroy {
 
   ngOnDestroy() {
     if (this.intervalId) clearInterval(this.intervalId);
+    if (this.slideIntervalId) clearInterval(this.slideIntervalId);
   }
 
   getFormattedDate(): string {
